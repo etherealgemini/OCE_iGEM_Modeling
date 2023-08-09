@@ -13,10 +13,10 @@ library(ggplot2)
 library(dplyr)
 
 data_df <- df %>%
-  group_by(Concentration) %>%
   filter(Concentration<251) %>%
   filter(Time<6000) %>%
   filter(Time>2900) %>%
+  group_by(Concentration) %>%
   summarize(
     Mean_Fluorescence = mean(Fluorescence),
     SE_Fluorescence = sd(Fluorescence) / sqrt(n())
