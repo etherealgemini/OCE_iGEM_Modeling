@@ -29,13 +29,8 @@ Ongoing.
 ### Task 3: Modeling of the HCHO sensor
 
 Here are the results.
-<center class="half">
-<img src=Graph/F-T.jpg width=266/>
-<img src=Graph/S-F-Combine.png width=300/>
-</center>
 
-<!-- ![F-T](Graph/F-T.jpg) -->
-<!-- ![S-F-C](Graph/S-F-Combine.png) -->
+![F-T](Graph/F-T.jpg) ![S-F-C](Graph/S-F-Combine.png)
 
 Generally speaking, we select the data that are collected:
 
