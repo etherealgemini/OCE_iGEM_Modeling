@@ -56,7 +56,7 @@ data_df <- df %>%
 #     Mean_H = mean(H),
 #     SE_H = sd(H) / sqrt(n())
 #   )
-fit <- nls(H ~ k*(b+x),data = data_df,start = c(k=1,b=-1))
+fit <- nlsLM(H ~ k*(b+x),data = data_df,start = c(k=1,b=-1))
 summary(fit)
 # 绘制希尔图
 k <- coef(fit)["k"]

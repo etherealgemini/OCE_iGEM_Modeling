@@ -11,6 +11,9 @@ library(ggplot2)
 library(dplyr)
 
 data_df <- df %>%
+  filter(Concentration<251) %>%
+  filter(Time<6100) %>%
+  filter(Time>2900) %>%
   group_by(Time,Concentration) %>%
   summarize(
     Mean_Fluorescence = mean(Fluorescence),
@@ -27,14 +30,14 @@ Smax <- max(data_df["Mean_Fluorescence"])
 p<- ggplot(data_df, aes(x = Concentration, y = Mean_Fluorescence, group = Time, color = Time)) +
   geom_line() +
   geom_point() +
-  geom_errorbar(aes(ymin = Mean_Fluorescence - SE_Fluorescence, ymax = Mean_Fluorescence + SE_Fluorescence), width = 15) +
-  labs(title = "Fluorescence signal variation with time at different HCHO concentration.",
-       x = "c(HCHO)/μmol*L-1",
+  geom_errorbar(aes(ymin = Mean_Fluorescence - SE_Fluorescence, ymax = Mean_Fluorescence + SE_Fluorescence), width = 3) +
+  labs(x = "c(HCHO)/μmol*L-1",
        y = "Fluorescence intensity in units of OD",
        color = "Time/sec") +
   theme_minimal()+
-  scale_color_gradient2(low = "pink1",mid = "blue",midpoint = 4500 ,high = "darkblue")+
-  geom_vline(xintercept = 0,color = "black",linetype = "dashed")+
-  geom_vline(xintercept = 251,color = "black",linetype = "dashed")
+  scale_color_gradient(low = "pink",high = "blue")
+ # scale_color_gradient2(low = "pink1",mid = "blue",midpoint = 5000 ,high = "darkblue")
+ # geom_vline(xintercept = 0,color = "black",linetype = "dashed")+
+ # geom_vline(xintercept = 251,color = "black",linetype = "dashed")
 
 print(p)

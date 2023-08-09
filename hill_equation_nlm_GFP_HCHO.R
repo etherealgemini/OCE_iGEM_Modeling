@@ -4,7 +4,7 @@
 library(openxlsx)
 
 # 读取Excel文件中的数据，假设文件名为"your_file.xlsx"，数据在Sheet1中
-df <- read.xlsx("D:/Coding/jupyter_notebook/iGEM/data/Flu_HCHO_Selected_data.xlsx",skipEmptyCols = TRUE,skipEmptyRows = TRUE)
+df <- read.xlsx("D:/Coding/jupyter_notebook/iGEM/data/Flu_HCHO_Processed_Full_data.xlsx",skipEmptyCols = TRUE,skipEmptyRows = TRUE)
 colnames(df) <- c('Time','Concentration','Fluorescence')
 
 
@@ -14,6 +14,9 @@ library(dplyr)
 
 data_df <- df %>%
   group_by(Concentration) %>%
+  filter(Concentration<251) %>%
+  filter(Time<6000) %>%
+  filter(Time>2900) %>%
   summarize(
     Mean_Fluorescence = mean(Fluorescence),
     SE_Fluorescence = sd(Fluorescence) / sqrt(n())
@@ -21,20 +24,13 @@ data_df <- df %>%
 Smin <- min(data_df["Mean_Fluorescence"])
 Smax <- max(data_df["Mean_Fluorescence"])
 
-library(dplyr)
 
-summary_df <- df %>%
-  group_by(Time, Concentration) %>%
-  reframe(
-    Mean_Fluorescence = mean(Fluorescence),
-    SE_Fluorescence = sd(Fluorescence) / sqrt(n())
-  )
-
+library(minpack.lm)
 # 使用nls函数拟合希尔方程
-fit <- nls(Mean_Fluorescence ~ (Smin+(Smax-Smin) * (Concentration^n) / ((Km^n) + (Concentration^n))),
+fit <- nlsLM(Mean_Fluorescence ~ (Smin+(Smax-Smin) * (Concentration^n) / ((Km^n) + (Concentration^n))),
            data = data_df,
-           start = list(Km = 10,
-                        n = 1.1))  # 设置初始值
+           start = list(Km = 50,
+                        n = 1))  # 设置初始值
 summary(fit)
 # 提取拟合的参数n和Km
 n <- coef(fit)["n"]
@@ -48,7 +44,8 @@ p <- ggplot(data_df, aes(x = Concentration, y = Mean_Fluorescence)) +
   geom_point(color="slateblue4") +
   geom_errorbar(aes(ymin = Mean_Fluorescence - SE_Fluorescence, ymax = Mean_Fluorescence + SE_Fluorescence),linewidth=0.5, width = 3,color="slateblue4") +
   stat_function(fun = function(x) Smin+(Smax-Smin) * (x^n) / (Km^n + (x^n)), color = "skyblue3",linewidth=1) +  # 添加拟合曲线
-  labs(title = "Fitted curve of fluorescence signal in units of OD value and HCHO concentration",
+  labs(
+  #      title = "Fitted curve of fluorescence signal in units of OD value and HCHO concentration",
        x = "c(HCHO)/μmol*L-1",
        y = "fluorescence signal in unit of OD") +
   theme_minimal()
