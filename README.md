@@ -31,7 +31,7 @@ Ongoing.
 Here are the results.
 
 ![F-T](Graph/F-T.jpg)
-![S-F](Graph/S-F.jpg)
+![S-F-C](Graph/S-F-Combine.png)
 
 Generally speaking, we select the data that are collected:
 
@@ -46,8 +46,8 @@ and here is the result:
 
 | Parameters | Estimate | Std. error | t value | P                |
 |------------|----------|------------|---------|------------------|
-| K_m        | 60.8330  | 5.1320     | 11.85   | 2.9× 10^(-5) *** |
-| n          | 1.8250   | 0.2699     | 6.76    | 2.5× 10^(-3) **  |
+| K_m        | 32.7494  | 2.5972     | 12.609   | 5.57e-05 *** |
+| n          | 1.6467   | 0.1996     | 8.249    | 4.27e-04 ***  |
 
 ![fit](Graph/fit-S-F-Hill.jpg)
 
