@@ -75,14 +75,14 @@ environment.
 
 #### Promotion
 
-ODE is powerful, but sometimes complex and less accurate, for the simplify of the system. To gain a more accurate result, we want to give FBA a shot.
+ODE is powerful, but sometimes complex and less accurate. To obtain a more accurate result, we want to give FBA a shot.
 
 #### Goals
 
 1. Simulate the sucrose production rate of algae.
 2. Simulate the growth rate of E. coli, without algae.
 3. Get the optimal ratio of different components in co-culture system.
-4. Add more constraint, push it to the real case.
+4. Add more constraints, push it to the real case.
 
 ## Useful things
 
