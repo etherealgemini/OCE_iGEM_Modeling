@@ -59,3 +59,27 @@ This may be split into some sub-tasks.
 1. Modeling the photosynthesis part, which responsible for sucrose production.
 2. Modeling the transformation of sucrose to glucose/fructose.
 3. Modeling the the growth of the culture.
+
+## Some method
+
+### ODE
+
+A classic way of describing a model's behaviour.
+
+### FBA(Flux balance analysis)
+
+#### What is FBA?
+
+FBA is a methametical method to study the behaviour of biochemical networks. It can reveal the flow of metabolites *in silico*, for example, the growth rate of *E. coli* in high $\text{Na}^+$ concentration 
+environment.
+
+#### Promotion
+
+ODE is powerful, but sometimes complex and less accurate, for the simplify of the system. To gain a more accurate result, we want to give FBA a shot.
+
+#### Goals
+
+1. Simulate the sucrose production rate of algae.
+2. Simulate the growth rate of E. coli, without algae.
+3. Get the optimal ratio of different components in co-culture system.
+4. Add more constraint, push it to the real case.
