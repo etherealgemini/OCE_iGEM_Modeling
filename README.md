@@ -83,3 +83,11 @@ ODE is powerful, but sometimes complex and less accurate, for the simplify of th
 2. Simulate the growth rate of E. coli, without algae.
 3. Get the optimal ratio of different components in co-culture system.
 4. Add more constraint, push it to the real case.
+
+## Useful things
+
+[2020 iGEM Team: UCL (gold medal)](https://2020.igem.org/Team:UCL/Contribution#4) - They serves some useful tips on how to implement FBA and a related toolbox COBRA. Besides, there are some tips about wiki development and scientific drawing.
+
+[BiGG database](http://bigg.ucsd.edu/) - A frequently used database when playing with COBRA. It collect models, reactions, metabolites and genes informations, and more importantly, almost all components in COBRA are consist with those in this database. Well, which means if you cannot find the target in here, you may need to define it manually and add it into your own model.
+
+[Microbe-microbe interaction in COBRA](https://github.com/opencobra/COBRA.tutorials/tree/master/analysis/microbeMicrobeInteractions) - Amazing. This is an official tutorial of studying microbe-microbe interaction with COBRA. Actually it contains all tutorials, just return to its home page.
