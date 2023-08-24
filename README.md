@@ -8,11 +8,11 @@ This repo is only for recording and for fun.
 
 ## Where we are right now
 
-Now, we have finished some part and are working on several things. Check out the TODO list!
+Now, we have finished some parts and are working on several things. Check out the TODO list!
 
 ## TODO
 
-1. Draw the path of whole project, including the chemical reaction and gene regulation.
+1. Draw the path of the whole project, including the chemical reaction and gene regulation.
 2. Modeling the formaldehyde operon and the related formaldehyde degradation process.
 3. Modeling the formaldehyde sensor part.
 4. Modeling the algae/e.coli coculture system.
@@ -37,7 +37,7 @@ Generally speaking, we select the data that are collected:
 1. after some time such that the system is stable.
 2. at the concentration of HCHO will not disable the sensor(e.coli).
 
-Then we use the processed data to fit to the equation:
+Then we use the processed data to fit the equation:
 
 $S=S_{min}+(S_{max}-S_{min})\times\frac{[F]^n}{K_m^n+[F]^n}$
 
@@ -56,21 +56,21 @@ Well, a bit hard.
 
 This may be split into some sub-tasks.
 
-1. Modeling the photosynthesis part, which responsible for sucrose production.
+1. Modeling the photosynthesis part, which is responsible for sucrose production.
 2. Modeling the transformation of sucrose to glucose/fructose.
-3. Modeling the the growth of the culture.
+3. Modeling the growth of the culture.
 
 ## Some method
 
 ### ODE
 
-A classic way of describing a model's behaviour.
+A classic way of describing a model's behavior.
 
 ### FBA(Flux balance analysis)
 
 #### What is FBA?
 
-FBA is a methametical method to study the behaviour of biochemical networks. It can reveal the flow of metabolites *in silico*, for example, the growth rate of *E. coli* in high $\text{Na}^+$ concentration 
+FBA is a mathematical method to study the behavior of biochemical networks. It can reveal the flow of metabolites *in silico*, for example, the growth rate of *E. coli* in high $\text{Na}^+$ concentration 
 environment.
 
 #### Promotion
@@ -81,13 +81,13 @@ ODE is powerful, but sometimes complex and less accurate. To obtain a more accur
 
 1. Simulate the sucrose production rate of algae.
 2. Simulate the growth rate of E. coli, without algae.
-3. Get the optimal ratio of different components in co-culture system.
+3. Get the optimal ratio of different components in the co-culture system.
 4. Add more constraints, push it to the real case.
 
 ## Useful things
 
-[2020 iGEM Team: UCL (gold medal)](https://2020.igem.org/Team:UCL/Contribution#4) - They serves some useful tips on how to implement FBA and a related toolbox COBRA. Besides, there are some tips about wiki development and scientific drawing.
+[2020 iGEM Team: UCL (gold medal)](https://2020.igem.org/Team:UCL/Contribution#4) - They serve some useful tips on how to implement FBA and a related toolbox COBRA. Besides, there are some tips about wiki development and scientific drawing.
 
-[BiGG database](http://bigg.ucsd.edu/) - A frequently used database when playing with COBRA. It collect models, reactions, metabolites and genes informations, and more importantly, almost all components in COBRA are consist with those in this database. Well, which means if you cannot find the target in here, you may need to define it manually and add it into your own model.
+[BiGG database](http://bigg.ucsd.edu/) - A frequently used database when playing with COBRA. It collects models, reactions, metabolites, and gene information, and more importantly, almost all components in COBRA are consistent with those in this database. Well, this means if you cannot find the target here, you may need to define it manually and add it to your model.
 
-[Microbe-microbe interaction in COBRA](https://github.com/opencobra/COBRA.tutorials/tree/master/analysis/microbeMicrobeInteractions) - Amazing. This is an official tutorial of studying microbe-microbe interaction with COBRA. Actually it contains all tutorials, just return to its home page.
+[Microbe-microbe interaction in COBRA](https://github.com/opencobra/COBRA.tutorials/tree/master/analysis/microbeMicrobeInteractions) - Amazing. This is an official tutorial for studying microbe-microbe interaction with COBRA. Actually, it contains all tutorials, just return to its home page.
