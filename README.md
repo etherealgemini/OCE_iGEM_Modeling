@@ -6,6 +6,7 @@ This is the modeling part of our iGEM project. The whole project is ongoing righ
 
 This repo is only for recording and for fun.
 
+**You may want to check the Logbook. I will record some inpiration, funny (or silly) troubleshooting process, updated much more often than here.**
 ## Where we are right now
 
 Now, we have finished some parts and are working on several things. Check out the TODO list!
