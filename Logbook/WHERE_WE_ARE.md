@@ -10,6 +10,7 @@
       - [Visualization with COBRA](#visualization-with-cobra)
       - [What we should do when applying FBA into our research](#what-we-should-do-when-applying-fba-into-our-research)
       - [build co-culture with COMET - 2023/08/30](#build-co-culture-with-comet---20230830)
+      - [build co-culture with COMET - 2023/08/31](#build-co-culture-with-comet---20230831)
   - [Toys we use](#toys-we-use)
     - [Language](#language)
     - [Toolkits](#toolkits)
@@ -114,7 +115,18 @@ We are currently build a community now, with a sucrose factory, a HCHO processor
 
 Theoretically, it should be easy and direct, but due to some unknown problem, the tool does not work well with my model.
 
-We thought the problems might be the different name of the same metabolite, for example, glc__D\[e\](COBRA) and glc-D\[e\](COMET), which will possibly affect the reactions(or process). Ughhhhhhhh, I hate the inconsistent between tools.
+We thought the problems might be the different name of the same metabolite, for example, glc__D\[e\](COBRA) and glc-D\[e\](COMET), which will possibly affect the reactions(or process). Ughhhhhhhh, I hate the inconsistence between tools. - 2023/08/30
+
+#### build co-culture with COMET - 2023/08/31
+
+We fix the problem of inconsistence, and yes, '-' and '__' is the problem. But now algae does not absorb photon, and just freedom dying, omg.
+
+After some debug, the system worked barely fine. Here is the result.
+
+![FBA_1](Algae_ecoli_growth.jpg)
+![FBA_2](Algae_ecoli_1_sucr.jpg)
+
+Now we are trying to figure out why algae is just dying.
 
 ## Toys we use
 
