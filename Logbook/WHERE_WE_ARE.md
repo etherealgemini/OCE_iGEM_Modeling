@@ -1,20 +1,32 @@
 ### Content
 (in case you want)
 - [iGEM\_OCE\_2023\_Modeling Logbook](#igem_oce_2023_modeling-logbook)
-  - [Things we do](#things-we-do)
+  - [Notice](#notice)
+  - [Timeline](#timeline)
     - [1. HCHO-GFP hill-equation fit](#1-hcho-gfp-hill-equation-fit)
     - [2. FBA(Flux Balance analysis)](#2-fbaflux-balance-analysis)
       - [What can it do](#what-can-it-do)
       - [Where we are right now](#where-we-are-right-now)
       - [Visualization with COBRA](#visualization-with-cobra)
+      - [What we should do when applying FBA into our research](#what-we-should-do-when-applying-fba-into-our-research)
+      - [build co-culture with COMET - 2023/08/30](#build-co-culture-with-comet---20230830)
   - [Toys we use](#toys-we-use)
     - [Language](#language)
+    - [Toolkits](#toolkits)
     - [Some useful things](#some-useful-things)
   - [Reference](#reference)
 
 # iGEM_OCE_2023_Modeling Logbook
 
-## Things we do
+## Notice
+
+This is the logbook of Modeling group. If you want to check the updated **result**, refer to **README.md** or just enter our [github website homepage](https://github.com/etherealgemini/OCE_iGEM_Modeling) and scroll down.
+
+Most of things here are something won't appear at the wiki, because here are filled with trial and error, like any other lab work.
+
+**Shout out to team [ShanghaiTech-China](https://2022.igem.wiki/shanghaitech-china/model#1).**
+
+## Timeline
 
 ### 1. HCHO-GFP hill-equation fit
 
@@ -61,6 +73,8 @@ Funny enough though, by changing the object of the model, the flux of the SPP bu
 
 #### Visualization with COBRA
 
+The motivation of visualizing the metabolite network is trying to do some trouble-shooting.
+
 Unlukily, the function draw_by_rxn() in COBRA visualization part [**paint4Net**](https://github.com/opencobra/COBRA.tutorials/tree/d2c66d011568ab6926f23957fbd628a614796e54/visualization/paint4Net) does not work well in 2022b, for the biograph structure is removed. However, in 2022a, although the function is runnable, it does not work well when the graph is too large.
 
 So we made some modification on the draw_by_rxn, switched the structure from *biograph* to *digraph(directioned graph)* and all related function called by the 'draw_by_rxn()'. Here is the result.
@@ -69,7 +83,38 @@ So we made some modification on the draw_by_rxn, switched the structure from *bi
 
 If reduce the nodes and edges by focusing on the interested path, we can label the edges and nodes on the panel, no need to guess and click.
 
-By the way, this is the graph of the optimized sucrose production factory, but fail to transport sugar out, LOL.
+By the way, this is the graph of the optimized sucrose production factory, but fail to transport sugar out, LOL. - 2023.08.26
+
+#### What we should do when applying FBA into our research
+
+This is quite important, and I missed this part at first.
+
+Basically, we will :
+
+1. Verify the Genome-Scale Metabolic Models(GEM) first. Because no one knows why out model worked and how accurate it is.
+2. Try simulate close to real case, like the carbon source, co-culture and other constraint.
+3. Simulate dynamically, or trace the change of biomass and interested metabolites such as HCHO and NH$_3$ over time, which will be verified or verify the result from wet lab.
+4. Guide the hardware build, which might be the ultimate goal. Try to get the optimal ratio of different component and check the robustness of the entire system.
+
+#### build co-culture with COMET - 2023/08/30
+
+I would like to show how powerful it can be at first. 
+
+**NOTICE: This two graph comes from the code in the tutorial of COMETs**
+
+![comet_eg_cell](image-1.png)
+
+![comet_eg_met](image-2.png)
+
+The algorithm will simulate an *in silicon* environment, the reaction inside each model, matter transport and cell growth and death. So, yes, it can simulate the dynamic of the whole system and allow trace on any metabolites\species.
+
+If you want, it can simulate something cooler, but might not need in our project. Check the [COMETs example](https://www.runcomets.org/examples) website here!
+
+We are currently build a community now, with a sucrose factory, a HCHO processor, and a sucrose processor, or an algae and two different e.coli.
+
+Theoretically, it should be easy and direct, but due to some unknown problem, the tool does not work well with my model.
+
+We thought the problems might be the different name of the same metabolite, for example, glc__D\[e\](COBRA) and glc-D\[e\](COMET), which will possibly affect the reactions(or process). Ughhhhhhhh, I hate the inconsistent between tools.
 
 ## Toys we use
 
@@ -80,6 +125,16 @@ R: statistic processing, plotting.
 Python: data processing, especially work with Excel worksheet from wet lab.
 
 Matlab: FBA, mainly because COBRA toolkit\[1\] worked well in Matlab.
+
+### Toolkits
+
+Gurobi: an industrial optimizer.
+
+COBRA: a FBA toolkit, serve various pre-packaged analysis tools, including model manufacture, FBA, rubust analysis and so forth.
+
+COMET: based on COBRA and Gurobi, a powerful community-dynamic-FBA toolkit, amazing.
+
+ggplot2: a basic plotting tools in Python and R.
 
 ### Some useful things
 
