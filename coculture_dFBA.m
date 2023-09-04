@@ -190,6 +190,7 @@ legend(nutrientNames)
 
 nonzeroSecMetIndices = find(secMets(:,2)); % define the lowest bound of consumption
 
+selectSecMets = {'sucr[e]'};
 %selectSecMetIndices = intersect(find(ismember(allMetsFromModels,selectSecMets)),nonzeroSecMetIndices);
 selectSecMetIndices = find(ismember(allMetsFromModels,selectSecMets));
 figure

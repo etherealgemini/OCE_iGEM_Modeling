@@ -11,6 +11,8 @@
       - [What we should do when applying FBA into our research](#what-we-should-do-when-applying-fba-into-our-research)
       - [build co-culture with COMET - 2023/08/30](#build-co-culture-with-comet---20230830)
       - [build co-culture with COMET - 2023/08/31](#build-co-culture-with-comet---20230831)
+      - [dying, dying, and dying algae](#dying-dying-and-dying-algae)
+      - [Stuck here? No](#stuck-here-no)
   - [Toys we use](#toys-we-use)
     - [Language](#language)
     - [Toolkits](#toolkits)
@@ -127,6 +129,27 @@ After some debug, the system worked barely fine. Here is the result.
 ![FBA_2](Algae_ecoli_1_sucr.jpg)
 
 Now we are trying to figure out why algae is just dying.
+
+#### dying, dying, and dying algae
+
+Yes, it is just dying.
+
+Here are some possibilities:
+
+1. the BIOMASS reaction is just does not have any flux over it.
+2. it has, but too small.
+   
+I'm curious about the flux over the BIOMASS reaction.
+
+#### Stuck here? No
+
+Uh, yeah. Something went wrong with that model, and I cannot find why. I will not stop trying, but we definitely need another way to bypass that.
+
+We will not simulate the co-culture system with algae, but only the sucrose digest part and formaldehyde digest part, and add sucrose as a nutrient.
+
+To make sure the result is real, we will refresh the amount of sucrose in a certain value, so that we can check how much sucrose production rate is necessary for a stable system.
+
+I know this cannot simulate the hidden effect of algae, but we still need a plan B.
 
 ## Toys we use
 
