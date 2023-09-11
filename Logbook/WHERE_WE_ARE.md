@@ -12,7 +12,9 @@
       - [build co-culture with COMET - 2023/08/30](#build-co-culture-with-comet---20230830)
       - [build co-culture with COMET - 2023/08/31](#build-co-culture-with-comet---20230831)
       - [dying, dying, and dying algae](#dying-dying-and-dying-algae)
-      - [Stuck here? No](#stuck-here-no)
+      - [Stuck here? No - 2023/09/04](#stuck-here-no---20230904)
+      - [Verify, adjust - 2023/09/06](#verify-adjust---20230906)
+    - [Algorithm based on COMETs](#algorithm-based-on-comets)
   - [Toys we use](#toys-we-use)
     - [Language](#language)
     - [Toolkits](#toolkits)
@@ -141,7 +143,7 @@ Here are some possibilities:
    
 I'm curious about the flux over the BIOMASS reaction.
 
-#### Stuck here? No
+#### Stuck here? No - 2023/09/04
 
 Uh, yeah. Something went wrong with that model, and I cannot find why. I will not stop trying, but we definitely need another way to bypass that.
 
@@ -150,6 +152,27 @@ We will not simulate the co-culture system with algae, but only the sucrose dige
 To make sure the result is real, we will refresh the amount of sucrose in a certain value, so that we can check how much sucrose production rate is necessary for a stable system.
 
 I know this cannot simulate the hidden effect of algae, but we still need a plan B.
+
+#### Verify, adjust - 2023/09/06
+
+So we adjust the glucose intake rate and death rate based on a paper, with a consistent unit. BL21 grew in minimal salt medium with 10 g/L glucose as a carbon source.
+
+![reference intake 1](1-s2.0-S2667370322000030-gr7.jpg)
+
+Our result:
+
+![Alt text](ecoli_growth_curve.png) 
+
+![Alt text](ecoli_growth_glucose_intake.png)
+
+notice that we adjust the unit to fit in the algorithm:
+
+1. initial glucose concentration: 10g/L -> 10mg/ml -> 5.5506E-2 mmol/ml
+2. initial population: 0.125 OD600 ~> 1.21475\*10^7 CFU/ml ~> 1.21475\*10^(-5) gDW/ml (gram dry weight)
+
+### Algorithm based on COMETs
+
+![algo_1](algo_1.jpg)
 
 ## Toys we use
 
