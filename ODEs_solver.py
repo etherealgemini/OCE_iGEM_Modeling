@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+from scipy.integrate import odeint
 
 def model(y, t, k):
     # Unpack state variables
@@ -132,7 +132,7 @@ k = {
 }
 
 # Solve the ODEs
-from scipy.integrate import odeint
+
 
 sol = odeint(model, y0, t, args=(k,))
 
