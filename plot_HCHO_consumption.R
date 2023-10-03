@@ -2,6 +2,7 @@
 library(openxlsx)
 library(ggplot2)
 library(dplyr)
+library(tidyr)
 
 # 读取Excel文件中的数据，假设文件名为"your_file.xlsx"，数据在Sheet1中
 setwd("D:/Coding/RProjects/OCE_iGEM_Modeling")
@@ -16,7 +17,7 @@ df_conc <- t(df_std_raw[1,])
 df_std <- df_std_raw[2:4,]
 df_std_avg <- colSums(df_std)/3
 
-df_data <- data.frame(t(bind_rows(df_std_raw[1,],df_std_avg)))
+df_std_data <- data.frame(t(bind_rows(df_std_raw[1,],df_std_avg)))
 
 
 # std curve fit
@@ -29,15 +30,16 @@ std_func <- function(x){
   return(k[1]*x)
 }
 
-p <- ggplot(df_data, aes(x = X2, y = X1)) +
+p <- ggplot(df_std_data, aes(x = X2, y = X1)) +
   #geom_line(color="cornflowerblue",linewidth = 1) +
   geom_point(color="slateblue3",size = 1.5) +
   stat_function(fun = std_func, color = "skyblue3",linewidth=0.8) +  # 添加拟合曲线
   labs(
-    #      title = "Fitted curve of fluorescence signal in units of OD value and HCHO concentration",
+    title = "Fitted curve of fluorescence signal in units of OD value and HCHO concentration",
     x = "fluorescence signal in unit of OD",
     y = "c(HCHO)/μmol*L-1") +
-  theme_minimal()
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
 
 show(p)
 ggsave('std_curve.tiff',p,width = 6,height = 5.2)
@@ -53,6 +55,28 @@ colnames(df_cell) <- c('M_0','M_10','M_20','M_30','M_40')
 
 df_HCHO <- bind_cols(std_func(df_OD412[,2:7]),df_OD412$Type)
 colnames(df_HCHO)[7]<-'Type'
+
+
+data_long <- gather(df_HCHO, key = "Time", value = "Value", -Type)
+summary_data <- data_long %>%
+  group_by(Time, Type) %>%
+  reframe(
+    Mean = mean(Value, na.rm = TRUE),
+    SD = sd(Value, na.rm = TRUE)
+  )
+p <- ggplot(summary_data, aes(x = Time, y = Mean,group = Type, color = Type)) +
+  geom_point(color='pink2') +
+  geom_line(linewidth = 0.5) +
+  geom_errorbar(aes(ymin = Mean - SD, ymax = Mean + SD), width = 0.07) +
+  labs(title = "Measured HCHO concentration change with time",
+       x = "Time/min",
+       y = "c(HCHO)/μM",
+       color = "Type") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+show(p)
+ggsave('HCHO_consomption.tiff',p,width = 6,height = 5.2)
+
 
 df_v <- df_HCHO %>%
   select(1:6) %>%
@@ -126,13 +150,14 @@ colnames(df_data)[4] <- 'sd_v'
 
 p <- ggplot(df_data, aes(x = Time, y = -mean_v,group=Type,color = Type)) +
   geom_line(linewidth = 0.6) +
-  geom_point(color="pink2") +
-  geom_errorbar(aes(ymin = -mean_v - sd_v, ymax = -mean_v + sd_v),linewidth=0.7, width = 1,color="pink3") +
+  geom_point() +
+  geom_errorbar(aes(ymin = -mean_v - sd_v, ymax = -mean_v + sd_v),linewidth=0.4, width = 0.7,color="pink3") +
   labs(
-    #      title = "Fitted curve of fluorescence signal in units of OD value and HCHO concentration",
+    title = "The formaldehyde metabolism rate over time at a unit OD600 value",
     x = "Time/min",
     y = "HCHO consumption velocity") +
-  theme_minimal()
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
 show(p)
 
 ggsave('HCHO_consomption_velocity_rev.tiff',p,width = 6,height = 5.2)
