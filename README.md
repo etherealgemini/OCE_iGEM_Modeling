@@ -85,6 +85,13 @@ ODE is powerful, but sometimes complex and less accurate. To obtain a more accur
 3. Get the optimal ratio of different components in the co-culture system.
 4. Add more constraints, push it to the real case.
 
+## Wiki
+
+| Diffusion coefficent | Value($mm^2s^{-1}$) | Substance                |
+|------------|- |------------------|
+| $D_{sugar}$  | 1.73 | sucrose, glucose   |
+| $D_f$        |  | formaldehyde |
+
 ## Useful things
 
 [2020 iGEM Team: UCL (gold medal)](https://2020.igem.org/Team:UCL/Contribution#4) - They serve some useful tips on how to implement FBA and a related toolbox COBRA. Besides, there are some tips about wiki development and scientific drawing.
