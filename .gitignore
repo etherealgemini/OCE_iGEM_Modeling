@@ -3,5 +3,5 @@
 .RData
 .Ruserdata
 *.eps
-
+*.tmp
 .idea/
