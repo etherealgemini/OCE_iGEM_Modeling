@@ -16,9 +16,9 @@ This work is licensed under a
 ### About the repository
 
 0. Refer to [iGEM's description of *Best Model Prize* in iGEM](https://2023.igem.wiki/example/model) to have a general impression.
-1. The repository is NOT cleaned up yet, since the time is swallowed by other courses. Sorry for that.
+1. The repository is NOT cleaned up yet, since time is swallowed by courses. Sorry for that.
 2. Refer to [the Model part of our team wiki](https://2023.igem.wiki/sustech-oce/model) for final detailed version of the project.
-3. We may only introduce some key part lost in wiki here.
+3. We may only introduce some key part here, check PDFs in [./Logbook](https://github.com/etherealgemini/OCE_iGEM_Modeling/tree/main/Logbook) for detailed explanation for some of the works.
 
 ### About the pathway illustration
 
@@ -52,6 +52,7 @@ You can refer to [this paper](https://www.nature.com/articles/nbt.1614), which i
     padding: 3px;">With no constraints, the flux distribution of a biological network may lie at any point in a solution space. When mass balance constraints imposed by the stoichiometric matrix S (labeled 1) and capacity constraints imposed by the lower and upper bounds (ai and bi) (labeled 2) are applied to a network, it defines an allowable solution space. The network may acquire any flux distribution within this space, but points outside this space are denied by the constraints. Through optimization of an objective function, FBA can identify a single optimal flux distribution that lies on the edge of the allowable solution space. (Orth et al., 2010)</div>
 </center>
 
+.
 <center>
     <img width="500" style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"
@@ -60,7 +61,7 @@ You can refer to [this paper](https://www.nature.com/articles/nbt.1614), which i
     <div style="color:orange; border-bottom: 1px solid #d9d9d9;
     display: inline-block;
     color: #fff;
-    padding: 3px;">(a) A metabolic network reconstruction consists of a list of stoichiometrically balanced biochemical reactions. (b) This reconstruction is converted into a mathematical model by forming a matrix (labeled S), in which each row represents a metabolite and each column represents a reaction. Growth is incorporated into the reconstruction with a biomass reaction (yellow column), which simulates metabolites consumed during biomass production. Exchange reactions (green columns) are used to represent the flow of metabolites, such as glucose and oxygen, in and out of the cell. (c) At steady state, the flux through each reaction is given by Sv = 0, which defines a system of linear equations. As large models contain more reactions than metabolites, there is more than one possible solution to these equations. (d) Solving the equations to predict the maximum growth rate requires defining an objective function Z = cTv (c is a vector of weights indicating how much each reaction (v) contributes to the objective). In practice, when only one reaction, such as biomass production, is desired for maximization or minimization, c is a vector of zeros with a value of 1 at the position of the reaction of interest. In the growth example, the objective function is Z = vbiomass (that is, c has a value of 1 at the position of the biomass reaction). (e) Linear programming is used to identify a flux distribution that maximizes or minimizes the objective function within the space of allowable fluxes (blue region) defined by the constraints imposed by the mass balance equations and reaction bounds. The thick red arrow indicates the direction of increasing Z. As the optimal solution point lies as far in this direction as possible, the thin red arrows depict the process of linear programming, which identifies an optimal point at an edge or corner of the solution space. (Orth et al., 2010)</div>
+    padding: 3px;">(Orth et al., 2010)</div>
 </center>
 
 ### COBRA Toolbox

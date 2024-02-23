@@ -80,6 +80,7 @@ for t = 1:timesteps
 
     mags = C_A;
 
+    % below are to assign the color to vector according to the value of "mags"
     % Get the current colormap
     currentColormap = colormap(gcf);
 
