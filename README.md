@@ -1,101 +1,104 @@
 # OCE_iGEM_Modeling
 
-## What is this
+[![CC BY 4.0][cc-by-shield]][cc-by]
 
-This is the modeling part of our iGEM project. The whole project is ongoing right now, stay tuned.
+This work is licensed under a
+[Creative Commons Attribution 4.0 International License][cc-by].
 
-This repo is only for recording and for fun.
+[![CC BY 4.0][cc-by-image]][cc-by]
 
-**You may want to check the Logbook. I will record some inpiration, funny (or silly) troubleshooting process, updated much more often than here.**
-## Where we are right now
+[cc-by]: http://creativecommons.org/licenses/by/4.0/
+[cc-by-image]: https://i.creativecommons.org/l/by/4.0/88x31.png
+[cc-by-shield]: https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg
 
-Now, we have finished some parts and are working on several things. Check out the TODO list!
+## 0. Introduction
 
-## TODO
+### About the repository
 
-1. Draw the path of the whole project, including the chemical reaction and gene regulation.
-2. Modeling the formaldehyde operon and the related formaldehyde degradation process.
-3. Modeling the formaldehyde sensor part.
-4. Modeling the algae/e.coli coculture system.
-5. Modeling the hardware.
+0. Refer to [iGEM's description of *Best Model Prize* in iGEM](https://2023.igem.wiki/example/model) to have a general impression.
+1. The repository is NOT cleaned up yet, since the time is swallowed by other courses. Sorry for that.
+2. Refer to [the Model part of our team wiki](https://2023.igem.wiki/sustech-oce/model) for final detailed version of the project.
+3. We may only introduce some key part lost in wiki here.
 
-### Task 1: path
+### About the pathway illustration
 
-This will go through the whole project. And this is what we have done now.
+We follows a standard named [Systems Biology Graphical Notation(SBGN)](https://sbgn.github.io/) to draw the pathway illustration.
 
-### Task 2: Modeling of HCHO operon/degradation
+![full_path_20231008](./Graph/full_path_20231008.jpg)
 
-Ongoing.
+### About the data
 
-### Task 3: Modeling of the HCHO sensor
+Yes, all data are open-sourced. Check the "./RawData" directory.
 
-Here are the results.
+### About questions
 
-![F-T](Graph/F-T.jpg) ![S-F-C](Graph/S-F-Combine.png)
+If you have any questions about our project, you may **open an issue** and illustrate your question in detail. I am not really familiar with all the math behind the method, so do not expect too much on this.
+I can find some sources referred to maybe.
 
-Generally speaking, we select the data that are collected:
+## 1. FBA (Flux Balance Analysis)
 
-1. after some time such that the system is stable.
-2. at the concentration of HCHO will not disable the sensor(e.coli).
+When considering the analysis of metabolites flows on a metabolic network, FBA is a common and useful mathematics tool. Basically, FBA is trying to solve a **constraint-based optimization problem**.
 
-Then we use the processed data to fit the equation:
+You can refer to [this paper](https://www.nature.com/articles/nbt.1614), which introduces the definition of FBA and the mathematics behind it, especially the Figure 1 and Figure 2 which are posted here.
 
-$S=S_{min}+(S_{max}-S_{min})\times\frac{[F]^n}{K_m^n+[F]^n}$
+<center>
+    <img width="500" style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"
+    src="./README_graph/what_is_fba_fig1.png">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #fff;
+    padding: 3px;">With no constraints, the flux distribution of a biological network may lie at any point in a solution space. When mass balance constraints imposed by the stoichiometric matrix S (labeled 1) and capacity constraints imposed by the lower and upper bounds (ai and bi) (labeled 2) are applied to a network, it defines an allowable solution space. The network may acquire any flux distribution within this space, but points outside this space are denied by the constraints. Through optimization of an objective function, FBA can identify a single optimal flux distribution that lies on the edge of the allowable solution space. (Orth et al., 2010)</div>
+</center>
 
-and here is the result:
+<center>
+    <img width="500" style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"
+    src="./README_graph/what_is_fba_fig2.png">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #fff;
+    padding: 3px;">(a) A metabolic network reconstruction consists of a list of stoichiometrically balanced biochemical reactions. (b) This reconstruction is converted into a mathematical model by forming a matrix (labeled S), in which each row represents a metabolite and each column represents a reaction. Growth is incorporated into the reconstruction with a biomass reaction (yellow column), which simulates metabolites consumed during biomass production. Exchange reactions (green columns) are used to represent the flow of metabolites, such as glucose and oxygen, in and out of the cell. (c) At steady state, the flux through each reaction is given by Sv = 0, which defines a system of linear equations. As large models contain more reactions than metabolites, there is more than one possible solution to these equations. (d) Solving the equations to predict the maximum growth rate requires defining an objective function Z = cTv (c is a vector of weights indicating how much each reaction (v) contributes to the objective). In practice, when only one reaction, such as biomass production, is desired for maximization or minimization, c is a vector of zeros with a value of 1 at the position of the reaction of interest. In the growth example, the objective function is Z = vbiomass (that is, c has a value of 1 at the position of the biomass reaction). (e) Linear programming is used to identify a flux distribution that maximizes or minimizes the objective function within the space of allowable fluxes (blue region) defined by the constraints imposed by the mass balance equations and reaction bounds. The thick red arrow indicates the direction of increasing Z. As the optimal solution point lies as far in this direction as possible, the thin red arrows depict the process of linear programming, which identifies an optimal point at an edge or corner of the solution space. (Orth et al., 2010)</div>
+</center>
 
-| Parameters | Estimate | Std. error | t value | P                |
-|------------|----------|------------|---------|------------------|
-| K_m        | 32.7494  | 2.5972     | 12.609   | 5.57e-05 *** |
-| n          | 1.6467   | 0.1996     | 8.249    | 4.27e-04 ***  |
+### COBRA Toolbox
 
-![fit](Graph/fit-S-F-Hill.jpg)
+The toolbox [COBRA](https://opencobra.github.io/cobratoolbox/latest/index.html) mentioned in the paper is usefull in implementation. We choose MATLAB version, though Python version is available as well.
 
-### Task 4: coculture system
+### BiGG database
 
-Well, a bit hard.
+[BiGG database](http://bigg.ucsd.edu/) played an important role in providing well constructed model in a friendly format for COBRA.
 
-This may be split into some sub-tasks.
+## FEM (Finite Element Method)
 
-1. Modeling the photosynthesis part, which is responsible for sucrose production.
-2. Modeling the transformation of sucrose to glucose/fructose.
-3. Modeling the growth of the culture.
+This is a numeric method widely used in simulation. The key idea of it is to divide **continueous bodies** into **discret small mesh of simple parts**, or elements. Refer to [wiki in Brilliant](https://brilliant.org/wiki/finite-elements/) for a better, rough understanding. Notice that the implementation of FEM is highly related to the problem's definition, so further research in the implementation in specific fields may be necessary.
 
-## Some method
+We use MATLAB to finish the modeling and solving.
 
-### ODE
+## Things We learned
 
-A classic way of describing a model's behavior.
+### Clarify the problem
 
-### FBA(Flux balance analysis)
+A clear definition of problem is one of the parts in the first step of modeling. Make sure what is the problem to solve, then there is a direction for research.
 
-#### What is FBA?
+### Talk to others in group
 
-FBA is a mathematical method to study the behavior of biochemical networks. It can reveal the flow of metabolites *in silico*, for example, the growth rate of *E. coli* in high $\text{Na}^+$ concentration 
-environment.
+Make sure everyone is actively engaged in the project and know what are others doing, which will prevent work on the same thing or something is missing due to lack of communication.
 
-#### Promotion
+### Talk to other groups
 
-ODE is powerful, but sometimes complex and less accurate. To obtain a more accurate result, we want to give FBA a shot.
+This is very important and easy to forget. One of the requirements of [best model in iGEM](https://2023.igem.wiki/example/model) is about the special contributions of model to the whole project.
 
-#### Goals
+What's more, communicate with other groups may help them strengthen the relation of their work with yours.
 
-1. Simulate the sucrose production rate of algae.
-2. Simulate the growth rate of E. coli, without algae.
-3. Get the optimal ratio of different components in the co-culture system.
-4. Add more constraints, push it to the real case.
+### Cite everything
 
-## Wiki
+This will not only prevent a plagiarism issue, but also support the results with solid sources.
 
-| Diffusion coefficent | Value($mm^2s^{-1}$) | Substance                |
-|------------|- |------------------|
-| $D_{sugar}$  | 1.73 | sucrose, glucose   |
-| $D_f$        |  | formaldehyde |
+If you use any tool, conclusion, data that are not originated from you, cite it in correct format, APA 7th for example.
 
-## Useful things
+## Reference
 
-[2020 iGEM Team: UCL (gold medal)](https://2020.igem.org/Team:UCL/Contribution#4) - They serve some useful tips on how to implement FBA and a related toolbox COBRA. Besides, there are some tips about wiki development and scientific drawing.
-
-[BiGG database](http://bigg.ucsd.edu/) - A frequently used database when playing with COBRA. It collects models, reactions, metabolites, and gene information, and more importantly, almost all components in COBRA are consistent with those in this database. Well, this means if you cannot find the target here, you may need to define it manually and add it to your model.
-
-[Microbe-microbe interaction in COBRA](https://github.com/opencobra/COBRA.tutorials/tree/master/analysis/microbeMicrobeInteractions) - Amazing. This is an official tutorial for studying microbe-microbe interaction with COBRA. Actually, it contains all tutorials, just return to its home page.
+Orth, J., Thiele, I. & Palsson, B. What is flux balance analysis?. Nat Biotechnol 28, 245–248 (2010). https://doi.org/10.1038/nbt.1614
