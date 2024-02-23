@@ -99,6 +99,10 @@ This will not only prevent a plagiarism issue, but also support the results with
 
 If you use any tool, conclusion, data that are not originated from you, cite it in correct format, APA 7th for example.
 
+### Great example
+
+[Toulouse_INSA-UPS, Best model nomination](https://2021.igem.org/Team:Toulouse_INSA-UPS/Model): inspired us of the usage of FBA
+
 ## Reference
 
 Orth, J., Thiele, I. & Palsson, B. What is flux balance analysis?. Nat Biotechnol 28, 245–248 (2010). https://doi.org/10.1038/nbt.1614
