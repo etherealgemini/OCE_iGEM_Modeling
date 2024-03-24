@@ -90,7 +90,7 @@ Make sure everyone is actively engaged in the project and know what are others d
 
 ### Talk to other groups
 
-This is very important and easy to forget. One of the requirements of [best model in iGEM](https://2023.igem.wiki/example/model) is about the special contributions of model to the whole project.
+One of the requirements of [best model in iGEM](https://2023.igem.wiki/example/model) is about the special contributions of model to the whole project.
 
 What's more, communicate with other groups may help them strengthen the relation of their work with yours.
 
@@ -101,6 +101,8 @@ This will not only prevent a plagiarism issue, but also support the results with
 If you use any tool, conclusion, data that are not originated from you, cite it in correct format, APA 7th for example.
 
 ### Great example
+
+[Lund University Biological System course note](http://home.thep.lu.se/~henrik/tek292/lectureNotes.pdf): good start point for newcomer in system biology
 
 [Toulouse_INSA-UPS, Best model nomination](https://2021.igem.org/Team:Toulouse_INSA-UPS/Model): inspired us of the usage of FBA
 

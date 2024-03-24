@@ -1,3 +1,4 @@
+# 写得并不是很工整熟练
 # 导入openxlsx包
 library(openxlsx)
 library(ggplot2)
@@ -183,6 +184,7 @@ type_name <- c(rep('2b+Kan',5),rep('BL21',5),
 time_seq <- c(rep(seq(10,50,10),5))
 library(purrr)
 
+# 其实应该用pivot_longer
 df_v_sd_long<-bind_cols(time_seq,as.numeric(t(data.frame(flatten(list(df_v_sd))))),type_name)
 df_v_mean_long<-bind_cols(time_seq,as.numeric(t(data.frame(flatten(list(df_v_mean))))),type_name)
 
