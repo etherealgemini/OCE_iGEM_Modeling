@@ -3,9 +3,9 @@
 
 %% load models
 
-%modelpath = [pwd filesep 'model'];
-%algae_core = readCbModel([modelpath filesep 'iJB785'],'fileType','SBML');
-%ecoli_core = readCbModel([modelpath filesep 'iB21_1397'],'fileType','SBML');
+modelpath = [pwd filesep 'model'];
+algae_core = readCbModel([modelpath filesep 'iJB785'],'fileType','SBML');
+ecoli_core = readCbModel([modelpath filesep 'iB21_1397'],'fileType','SBML');
 %ecoli_core_sucr_digest = readCbModel([modelpath filesep 'iB21_1397'],'fileType','SBML');
 %ecoli_core_Sulf = readCbModel([modelpath filesep 'iB21_1397'],'fileType','SBML');
 
